@@ -1,0 +1,59 @@
+name: bloc_bootcamp
+
+packages:
+  - .
+  - packages/*
+
+scripts:
+  format:
+    find . -not -path './.git/*' -not -path '*/.dart_tool/*' -not -path '*/bricks/*' -name "*.dart" ! -name "*.g.dart" ! -name "*_test.dart" ! -name '*.swagger.*' ! -name '*.config.dart' ! -name '*.chopper.dart' ! -name '*.freezed.dart' ! -name '*.module.dart' ! -name '*.gr.dart' | tr '\n' ' ' | xargs fvm dart format --line-length=100
+
+  get_forced:
+    run: melos exec -- fvm flutter pub get && melos run get
+    description: Sometimes `melos bootstrap` doesn't work. This command will run regular `pub get` and then `melos bootstrap`.
+
+  gen:
+    exec: fvm flutter pub run build_runner build --delete-conflicting-outputs
+    orderDependents: true
+    packageFilters:
+      dependsOn: build_runner
+
+  clean_gen_cache:
+    run: fvm flutter pub run build_runner clean
+
+  clean_flutter:
+    exec: fvm flutter clean
+    packageFilters:
+      scope: "*"
+
+  clean_lock:
+    run: sh scripts/clean_all_pubspec_lock.sh
+
+  clean_overrides:
+    run: sh scripts/clean_all_pubspec_overrides.sh
+
+  setup_no_firebase:
+    run: melos bootstrap && melos run gen-all && melos run gen_locale
+
+  clean_setup:
+    run: melos run clean_flutter && melos clean && melos run setup
+
+  test:
+    exec: fvm flutter test
+    packageFilters:
+      dirExists: "test"
+
+  test_golden_update:
+    exec: fvm flutter test --update-goldens --tags=golden
+    packageFilters:
+      dirExists: "test"
+
+  gen_full_coverage:
+    run: fvm dart pub global activate full_coverage && melos exec --dir-exists="test" -- fvm dart pub global run full_coverage
+    description: Generates test files with imports, so coverage will show all files.
+
+  coverage:
+    run: melos run gen_full_coverage && melos exec --dir-exists="test" -- fvm flutter test --coverage ; melos exec --dir-exists="test" -- "\$MELOS_ROOT_PATH/scripts/combine_coverage.sh" && genhtml coverage_report/lcov.info -o coverage_report/html && open coverage_report/html/index.html
+
+  upd_pods_m1:
+    run: cd ios && rm Podfile.lock && arch -x86_64 pod repo update && arch -x86_64 pod install
