@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared/shared.dart';
+import 'package:counter/counter.dart';
 
 void main() {
-  runApp(MyApp());
+  Bloc.observer = const CounterObserver();
+  runApp(const CounterApp());
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
