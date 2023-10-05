@@ -1,5 +1,7 @@
 name: bloc_bootcamp
 
+sdkPath: .fvm/flutter_sdk
+
 packages:
   - .
   - packages/*

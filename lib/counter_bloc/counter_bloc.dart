@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:shared/shared.dart';
 
 class CounterState {
   CounterState({required this.currentValue});

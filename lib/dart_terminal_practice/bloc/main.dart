@@ -1,4 +1,5 @@
-import 'package:bloc/bloc.dart';
+
+import 'package:shared/shared.dart';
 
 Future<void> main() async {
   print('Bloc theory');
