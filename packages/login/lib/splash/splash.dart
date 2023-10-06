@@ -1,0 +1,1 @@
+export 'package:login/splash/view/splash_page.dart';

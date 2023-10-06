@@ -19,6 +19,8 @@ dependencies:
     path: packages/timer
   infinite_list:
     path: packages/infinite_list
+  login:
+    path: packages/login
 
   cupertino_icons: ^1.0.2
 
