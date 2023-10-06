@@ -1,4 +1,4 @@
-name: timer
+name: infinite_list
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -11,6 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  bloc_concurrency: ^0.2.2
+  http: ^1.1.0
+  stream_transform: ^2.1.0
+
   shared:
     path: ../shared
 
@@ -19,6 +23,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  mocktail: ^1.0.1
 
 flutter:
   uses-material-design: true

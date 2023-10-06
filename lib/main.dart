@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
-import 'package:counter/counter.dart';
-import 'package:timer/timer.dart';
+// import 'package:counter/counter.dart';
+// import 'package:timer/timer.dart';
+import 'package:infinite_list/infinite_list.dart';
 
 void main() {
-  Bloc.observer = const TimerObserver();
+  Bloc.observer = const SimpleBlocObserver();
   runApp(const App());
 }
