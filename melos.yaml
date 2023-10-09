@@ -6,6 +6,7 @@ packages:
   - .
   - packages/*
   - packages/login/packages/*
+  - packages/weather/packages/*
 
 scripts:
   format:
