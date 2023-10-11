@@ -21,6 +21,8 @@ dependencies:
     path: packages/infinite_list
   login:
     path: packages/login
+  weather:
+    path: packages/weather
 
   cupertino_icons: ^1.0.2
 
